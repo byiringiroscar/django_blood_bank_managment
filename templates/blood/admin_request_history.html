@@ -1,0 +1,101 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{%load static%}
+<head>
+ <style>
+     #export-pdf{
+         background-color: #C32D22;
+         text-decoration: none;
+         margin-bottom: 2px;
+         width: 130px;
+         height: 40px;
+         color: white;
+         border: none;
+         padding: 5px 10px;
+         border-radius: 5px;
+         cursor: pointer;
+         text-transform: uppercase;
+         font-size: 13px;
+         font-weight: bold;
+         display: flex;
+         align-items: center;
+         {#position: relative;#}
+         float: right;
+     }
+     #export-pdf:hover{
+         background-color: #527a52;
+     }
+
+
+
+
+     .label {
+  color: white;
+  padding: 8px;
+}
+
+.success {background-color: #4CAF50;} /* Green */
+.info {background-color: #2196F3;} /* Blue */
+.warning {background-color: #ff9800;} /* Orange */
+.danger {background-color: #f44336;} /* Red */
+.other {background-color: #e7e7e7; color: black;} /* Gray */
+ </style>
+</head>
+<br><br>
+
+<div class="container">
+    <H4 class="text-center">Blood Request History</H4><br>
+    {% if message %}
+   <h5 class="text-center" style="color: red;"> {{message}}</h5><br>
+{% else %}
+
+{% endif %}
+
+    <a id="export-pdf" href="{% url 'export-pdf' %}">Export pdf</a>
+    <table class="table table-light table-hover table-bordered table-striped">
+
+        <thead class="bg-dark">
+            <tr>
+                <th scope="col" style="color: rgb(192, 192, 192);">Patient Name</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Age</th>
+                
+                <th scope="col" style="color: rgb(192, 192, 192);">Reason</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Blood Group</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Unit (ml)</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Date</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Status</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Stock Status</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in requests %}
+            <tr>
+                <td> {{t.patient_name}}</td>
+                <td>{{t.patient_age}}</td>
+                
+                
+                <td>{{t.reason}}</td>
+                <td>{{t.bloodgroup}}</td>
+                <td>{{t.unit}}</td>
+                <td>{{t.date}}</td>
+                {% if t.status == 'Approved' %}
+                <td><span class="label success"> Approved</span></td>
+                <td><span class="label success"> {{t.unit}} Unit Deducted From Stock</span></td>
+                {% else %}
+                <td><span class="label danger">Rejected</span></td>
+                <td><span class="label danger"> 0 Unit Deducted From Stock</span></td>
+                {% endif %}
+                
+                
+            
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    
+    </table>
+</div>
+
+{% endblock content %}

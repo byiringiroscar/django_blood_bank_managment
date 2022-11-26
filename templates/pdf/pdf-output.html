@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Output</title>
+    <style>
+
+        .blood{
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+
+    }
+    @page  {
+            size: "A4";
+            margin: 2.5cm 1.5cm 3.5cm 1.5cm;
+
+        @top-center {
+            content: "Online Blood Bank System";
+        }
+        @bottom-right {
+            content: "Page " counter(page) " of " counter(pages);
+        }
+    }
+
+
+
+
+
+</style>
+</head>
+
+
+<body>
+
+
+
+    <h2 class="blood">Online Blood Bank System</h2>
+<table class="table">
+    <div class="thead">
+        <tr>
+            <th>Patient Name</th>
+            <th>Age</th>
+            <th>Reason</th>
+            <th>Blood Group</th>
+            <th>Unit(ml)</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Stock Status</th>
+
+        </tr>
+    </div>
+    <tbody>
+            {% for request_report in request_report %}
+                <tr>
+                    <td>{{ request_report.patient_name }}</td>
+                    <td>{{ request_report.patient_age }}</td>
+                    <td>{{ request_report.reason }}</td>
+                    <td>{{ request_report.bloodgroup }}</td>
+                    <td>{{ request_report.unit }}</td>
+                    <td>{{ request_report.date }}</td>
+                    {% if t.status == 'Approved' %}
+                    <td><span class="label success"> Approved</span></td>
+                    <td><span class="label success"> {{t.unit}} Unit Deducted From Stock</span></td>
+                    {% else %}
+                    <td><span class="label danger">Rejected</span></td>
+                    <td><span class="label danger"> 0 Unit Deducted From Stock</span></td>
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

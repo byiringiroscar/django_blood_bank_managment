@@ -1,0 +1,89 @@
+{%load static%}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Online Blood Bank System|Patient Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+      <script src="{% static 'jquerry/jquery-3.6.1.min.js' %}"></script>
+
+        {#   Data table section start   #}
+              <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}"/>
+
+                <script type="text/javascript" src="{% static 'datatable/datatables.min.js' %}"></script>
+      {#   Data table section end   #}
+ 
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Main CSS-->
+    <link href="{% static "css/main.css" %}"rel="stylesheet" media="all">
+    <style>
+
+    </style>
+  </head>
+  <body>
+    {% include "blood/navbar.html" %}
+
+
+
+
+    <div class="page-wrapper bg-gra-03 p-b-50">0
+        <div class="wrapper wrapper--w960">
+            <br><br><br>
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">Hospital Information</h2>
+                </div>
+
+            </div>
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:80%">
+        <thead>
+            <tr>
+                <th>Hospital Name</th>
+                <th>Hospital Location</th>
+                <th>Hospital Start Time</th>
+                <th>Hospital End Time</th>
+                <th>Hospital Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hospital in hospitals %}
+            <tr>
+                <td>{{ hospital.hospital_name }}</td>
+                <td>{{ hospital.hospital_location }}</td>
+                <td>{{ hospital.hospital_start_time }}</td>
+                <td>{{ hospital.hospital_end_time }}</td>
+                <td>{{ hospital.hospital_phone }}</td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+        </div>
+
+    </div>
+
+
+{% include "blood/footer.html" %}
+
+    <script>
+        let table = new DataTable('#example', {
+    // options
+});
+
+
+
+    </script>
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+</html>

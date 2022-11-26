@@ -1,0 +1,44 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{%load static%}
+<br><br>
+<div class="container">
+    <H4 class="text-center">Add Hospital</H4><br>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+              {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Hospital Name</label>
+              <input type="text" class="form-control" name="hospital_name"  placeholder="Enter Hospital Name --">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Hospital Location</label>
+              <input type="text" class="form-control" name="hospital_location" placeholder="Hospital location --">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Hospital Start Time</label>
+            <input type="time" class="form-control" name="hospital_start_time"  placeholder="Enter starting Time --">
+          </div>
+          <div class="form-group">
+            <label for="inputAddress2">Hospital Start Time</label>
+            <input type="time" class="form-control" name="hospital_end_time" id="inputAddress2" placeholder="Enter Ending Time --">
+          </div>
+            <div class="form-group">
+            <label for="inputAddress2">Hospital phone</label>
+            <input type="tel" class="form-control" name="hospital_phone" placeholder="Enter Hospital Phone number --">
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+
+{% endblock content %}
